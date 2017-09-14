@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<title>Merge Tiffs</title>
+	<style>
+		
+		.form_cont, #selected_img_preview{width:100%; height: auto; float: left; margin-top: 10px;}
+		#selected_img_preview img{width:400px; height: auto; float: left; margin:20px;}
+		.output_file_cont{width:100%; height: auto; float:left; border:#dddddd dashed 1px;}
+	</style>
+	<Script>
+	
+
+	function readURL(input) {
+			document.getElementById("selected_img_preview").innerHTML = '';
+            if (input.files) {
+                for(var i=0;i<input.files.length;i++){
+	                var reader = new FileReader();
+
+	                reader.onload = function (e) {
+	          			document.getElementById("selected_img_preview").insertAdjacentHTML('beforeend','<img src="'+e.target.result+'" />');
+	                };
+
+	                reader.readAsDataURL(input.files[i]);
+            	}
+            }
+        }
+	</Script>
+</head>
+<body>
+	<form action="uploadimages" method="post" enctype="multipart/form-data">
+		<label>Select Images:</label> <input type="file" name="tiffimages" onchange="readURL(this);" multiple="true" /> <input type="submit" value="Start Upload" name="uploadtiffs" />
+	</form>
+	<div id="selected_img_preview"></div>
+	<div class="output_file_cont"></div>
+</body>
+</html>
